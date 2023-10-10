@@ -776,17 +776,15 @@ app.post("/bot", async (req, res) => {
 //CONTENT GENERATOR
 app.post("/content", async (req, res) => {
   const { topic, contentStyle, keywords, creativityLevel } = req.body;
-  console.log("content")
-  console.log(process.env.OPENAI_API_KEY)
   try {
     const model = new ChatOpenAI({
       temperature: creativityLevel / 10, // creativityLevel is a number between 1 and 10
-      maxTokens: 500,
+      maxTokens: 200,
       openAIApiKey: `${process.env.OPENAI_API_KEY}`,
       modelName: "gpt-3.5-turbo-16k",
     });
     const promptTemplate = PromptTemplate.fromTemplate(
-      "Generate a social media post about the topic {Topic} the content must not exceed 200 words. \
+      "Generate a social media post about the topic {Topic} the content must not exceed 50 words. \
         using these and other good keywords: \
         {Keywords}. Content should be {ContentStyle}. You need to return a json with two properties \
          A template example for answer is:  {example}"
