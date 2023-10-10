@@ -768,13 +768,14 @@ app.post("/bot", async (req, res) => {
     chat_history: chat.map((message) => message.message).join(" \n "),
   });
 
-  return result.content;
+  return res.json(result.content);
 });
 
 //CONTENT GENERATOR
 app.post("/content", async (req, res) => {
   const { topic, contentStyle, keywords, creativityLevel } = req.body;
-
+  console.log("content")
+  console.log(process.env.OPENAI_API_KEY)
   try {
     const model = new ChatOpenAI({
       temperature: creativityLevel / 10, // creativityLevel is a number between 1 and 10
@@ -795,7 +796,7 @@ app.post("/content", async (req, res) => {
       Keywords: keywords,
       example: `{"heading": <heading>, "content": <content> }`,
     });
-    return result.content;
+    return res.json(result.content);
   } catch (error) {
     console.log(error);
   }
