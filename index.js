@@ -779,7 +779,7 @@ app.post("/content", async (req, res) => {
     const model = new ChatOpenAI({
       temperature: creativityLevel / 10, // creativityLevel is a number between 1 and 10
       maxTokens: 500,
-      openAIApiKey: `${process.env.VITE_VERCEL_ENV}`,
+      openAIApiKey: `${process.env.OPENAI_API_KEY}`,
       modelName: "gpt-3.5-turbo-16k",
     });
     const promptTemplate = PromptTemplate.fromTemplate(
