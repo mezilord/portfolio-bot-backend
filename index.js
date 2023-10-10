@@ -7,7 +7,9 @@ import { PromptTemplate } from "langchain/prompts";
 
 const app = express();
 env.config();
-app.use(cors("*"));
+app.use(cors({
+  origin: 'https://mohdbashir-37mv.vercel.app',
+}));
 app.use(bodyParser.json());
 
 app.listen("3080", () => console.log("listening on port 3080"));
